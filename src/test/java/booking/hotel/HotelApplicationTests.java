@@ -1,4 +1,4 @@
-package reservationprogram.hotel;
+package booking.hotel;
 
 import org.junit.jupiter.api.Test;
 
