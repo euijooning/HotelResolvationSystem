@@ -108,8 +108,21 @@ public class HotelService {
     }
 
 
+    // 사용자의 소지금을 업데이트하는 메서드
+    public void putUserAsset(String userName, String userPhone, int userAsset) {
+        for (User user : userRepository.getUserList()) {
+            // 이름, 전화번호가 모두 일치하는 유저리스트가 있다면
+            if (userName.equals(user.getUserName()) && userPhone.equals(user.getUserPhone())) {
+                // 유저 목록의 소지금을 변경하는 매서드를 실행.
+                userRepository.setAsset(user, userAsset);
+                return;
+            }
+        }
+    }
 
-    private void putHotelAsset(int userAsset) {
+
+    // 호텔 자산 (보유금)을 업데이트하는 메서드
+    public void putHotelAsset(int userAsset){
         hotelRepository.setAsset(userAsset);
     }
 
