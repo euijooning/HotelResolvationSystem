@@ -6,7 +6,7 @@ import booking.hotel.entity.Room;
 import java.util.List;
 
 public class HotelRepository {
-    Hotel hotel = new Hotel();
+    Hotel hotel = new Hotel(); // 호텔 객체 생성
 
     public int getAsset(){
         return hotel.getHotelAsset();
