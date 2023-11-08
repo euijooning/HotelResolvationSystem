@@ -14,7 +14,7 @@ public class Reservation {
     private String reservationDate;       // 예약 날짜
 
     public Reservation(Room room, String userName, String userPhone, String reservationDate) {
-        this.reservationId = UUID.randomUUID().toString();
+        this.reservationId = UUID.randomUUID().toString().substring(0, 10);
         this.room = room;
         this.userName = userName;
         this.userPhone = userPhone;
