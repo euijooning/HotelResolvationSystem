@@ -7,8 +7,11 @@ import booking.hotel.repository.HotelRepository;
 import booking.hotel.repository.ReservationRepository;
 import booking.hotel.repository.UserRepository;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class HotelService {
@@ -138,4 +141,39 @@ public class HotelService {
         return false;
     }
 
+
+    // 5. Validation Service
+
+    // 사용자 이름과 전화번호를 기반으로 데이터의 유효성을 검사하는 메서드
+    public boolean validateUserDataInDB(String userName, String userPhone) {
+        for (User user : userRepository.getUserList()) {
+            if (userName.equals(user.getUserName()) && userPhone.equals(user.getUserPhone())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // 날짜 형식의 유효성을 검사하는 메서드
+    public boolean validateDateFormat(String date) {
+        try {
+            SimpleDateFormat dateFormatParser = new SimpleDateFormat("yyyy-MM-dd");
+            dateFormatParser.setLenient(false);
+            dateFormatParser.parse(date);
+            // 현재 날짜와 비교하여 7일 이내 여부를 확인
+            return LocalDate.now().compareTo(LocalDate.parse(date)) <= 0 && LocalDate.now().plusDays(7).isAfter(LocalDate.parse(date));
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    // 전화번호 형식의 유효성을 검사하는 메서드
+    public boolean validatePhoneNumber(String phoneNumber){
+        return Pattern.matches("^01(?:0|1|[6-9])-\\d{4}-\\d{4}$", phoneNumber);
+    }
+
+    // 관리자 비밀번호의 유효성을 검사하는 메서드
+    public boolean validateAdminPassword(String password){
+        return hotelRepository.getAdminPassword().equals(password);
+    }
 }
