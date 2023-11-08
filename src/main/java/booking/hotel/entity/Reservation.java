@@ -13,11 +13,11 @@ public class Reservation {
     private String phoneNumber;           // 고객 전화번호
     private String reservationDate;       // 예약 날짜
 
-    public Reservation(Room room, String userName, String userPhone, String reservationDate) {
+    public Reservation(Room room, String username, String phoneNumber, String reservationDate) {
         this.reservationId = UUID.randomUUID().toString().substring(0, 10);
         this.room = room;
-        this.username = userName;
-        this.phoneNumber = userPhone;
+        this.username = username;
+        this.phoneNumber = phoneNumber;
         this.reservationDate = ZonedDateTime.now(ZoneId.of("+9")).format(DateTimeFormatter.ofPattern(reservationDate+"'T'HH:mm:ssz"));
     }
 

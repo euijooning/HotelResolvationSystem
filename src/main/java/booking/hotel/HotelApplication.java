@@ -98,8 +98,8 @@ public class HotelApplication {
             }
 
             requestInputLog.showRequestPhoneNumberMessage();
-            String userPhone = input.nextLine();
-            boolean isValidPhoneNumber = hotelService.validatePhoneNumber(userPhone);
+            String phoneNumber = input.nextLine();
+            boolean isValidPhoneNumber = hotelService.validatePhoneNumber(phoneNumber);
             if(!isValidPhoneNumber) {
                 notMatchLog.showNotMatchPhoneNumberFormatMessage();
                 continue;
@@ -115,11 +115,11 @@ public class HotelApplication {
             }
 
             // 유저가 기존 DB에 있는지 여부를 판단하여, 업데이트 할 지, 새로 생성 할 지를 결정한다.
-            boolean hasUserInDB = hotelService.validateUserDataInDB(username, userPhone);
+            boolean hasUserInDB = hotelService.validateUserDataInDB(username, phoneNumber);
             if(hasUserInDB){
-                hotelService.putUserAsset(username, userPhone, userAsset);
+                hotelService.putUserAsset(username, phoneNumber, userAsset);
             }else{
-                hotelService.postNewUser(username, userPhone, userAsset);
+                hotelService.postNewUser(username, phoneNumber, userAsset);
             }
 
             // 메인메뉴 진입.
@@ -155,7 +155,7 @@ public class HotelApplication {
                                 continue;
                             }
                             // 예약 요청 시, 소지금 여부를 체크하여 케이스에 맞는 액션을 취합니다.
-                            String reservationResponse = hotelService.requestReservation(selectedRoomNumber, username, userPhone, reservationRequestDate);
+                            String reservationResponse = hotelService.requestReservation(selectedRoomNumber, username, phoneNumber, reservationRequestDate);
                             switch (reservationResponse){
                                 case "잔액부족":
                                     notExistLog.showNotExistRemainMessage();
@@ -171,15 +171,15 @@ public class HotelApplication {
                         }
                     case "2":  // 예약번호 조회 : 유저이름, 유저전화번호를 이용
                         requestInputLog.showRequestUsernameMessage();
-                        String searchUserName = input.nextLine();
-                        if(searchUserName.equals("")){
+                        String searchUsername = input.nextLine();
+                        if(searchUsername.equals("")){
                             notMatchLog.showNotMatchStringFormatMessage();
                             continue;
                         }
 
                         requestInputLog.showRequestPhoneNumberMessage();
-                        String searchUserPhone = input.nextLine();
-                        isValidPhoneNumber = hotelService.validatePhoneNumber(searchUserPhone);
+                        String searchPhoneNumber = input.nextLine();
+                        isValidPhoneNumber = hotelService.validatePhoneNumber(searchPhoneNumber);
 
                         if(!isValidPhoneNumber) {
                             notMatchLog.showNotMatchPhoneNumberFormatMessage();
@@ -187,7 +187,7 @@ public class HotelApplication {
                         }
 
                         // 예약번호 리스트를 가져와 유무에 따라 각기 다른 화면을 보여주기
-                        List<String> reservationIdList = hotelService.getReservationIdList(searchUserName, searchUserPhone);
+                        List<String> reservationIdList = hotelService.getReservationIdList(searchUsername, searchPhoneNumber);
                         if(reservationIdList.size() == 0){
                             notExistLog.showNotExistReservationIdMessage();
                         } else {

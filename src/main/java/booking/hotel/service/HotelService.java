@@ -92,9 +92,9 @@ public class HotelService {
     }
 
     // 사용자 이름과 전화번호로 예약 번호 목록을 반환하는 메서드
-    public List<String> getReservationIdList(String userName, String phoneNumber){
+    public List<String> getReservationIdList(String username, String phoneNumber){
         List<Reservation> reservations = reservationRepository.getReservationList();
-        return reservations.stream().filter(reservation -> reservation.getUsername().equals(userName)
+        return reservations.stream().filter(reservation -> reservation.getUsername().equals(username)
                         && reservation.getPhoneNumber().equals(phoneNumber))
                 .map(Reservation::getReservationId)
                 .collect(Collectors.toList());
@@ -109,10 +109,10 @@ public class HotelService {
 
 
     // 사용자의 소지금을 업데이트하는 메서드
-    public void putUserAsset(String userName, String userPhone, int userAsset) {
+    public void putUserAsset(String username, String phoneNumber, int userAsset) {
         for (User user : userRepository.getUserList()) {
             // 이름, 전화번호가 모두 일치하는 유저리스트가 있다면
-            if (userName.equals(user.getUsername()) && userPhone.equals(user.getPhoneNumber())) {
+            if (username.equals(user.getUsername()) && phoneNumber.equals(user.getPhoneNumber())) {
                 // 유저 목록의 소지금을 변경하는 매서드를 실행.
                 userRepository.setAsset(user, userAsset);
                 return;
@@ -145,9 +145,9 @@ public class HotelService {
     // 5. Validation Service
 
     // 사용자 이름과 전화번호를 기반으로 데이터의 유효성을 검사하는 메서드
-    public boolean validateUserDataInDB(String userName, String userPhone) {
+    public boolean validateUserDataInDB(String username, String phoneNumber) {
         for (User user : userRepository.getUserList()) {
-            if (userName.equals(user.getUsername()) && userPhone.equals(user.getPhoneNumber())) {
+            if (username.equals(user.getUsername()) && phoneNumber.equals(user.getPhoneNumber())) {
                 return true;
             }
         }
