@@ -35,7 +35,7 @@ public class HotelService {
     // 객실 예약을 요청하고 결과를 반환하는 메서드
     public String requestReservation(int roomNumber, String username, String phoneNumber, String date) {
         for (Room room : getBookableRoomList(date)) {  // ReservationList - list에서 해당 date에 예약 가능한 방 정보를 모두 불러온다.
-            if (room.getRoomNo() == roomNumber) {  // 그 중에 roomNo와 일치하는 room list가 있다면
+            if (room.getRoomNumber() == roomNumber) {  // 그 중에 방 번호와 일치하는 room list가 있다면
                 for (User user : userRepository.getUserList()) {
                     if (user.getUserName().equals(username) && user.getUserPhone().equals(phoneNumber)) {
                         if (user.getUserAsset() >= room.getPrice()) {
@@ -69,7 +69,7 @@ public class HotelService {
         for(Room room : hotelRepository.getRoomList()) {
             for (Reservation reservation : reservationRepository.getReservationList()) {
                 String reservationDate = reservation.getReservationDate().substring(0, 10);
-                if (reservationDate.equals(date) && reservation.getRoom().getRoomNo() == room.getRoomNo()) {
+                if (reservationDate.equals(date) && reservation.getRoom().getRoomNumber() == room.getRoomNumber()) {
                     availableList.remove(room);
                     break;
                 }

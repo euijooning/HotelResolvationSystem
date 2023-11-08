@@ -15,7 +15,7 @@ public class Room {
     }
 
     // getter 매소드 : 저장하고 있는 객실정보를 돌려준다?
-    public int getRoomNo(){
+    public int getRoomNumber(){
         return roomNumber;
     }
 
