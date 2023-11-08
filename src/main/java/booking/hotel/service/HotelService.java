@@ -123,4 +123,19 @@ public class HotelService {
         hotelRepository.setAsset(userAsset);
     }
 
+
+    // 4. DELETE Service
+    // 예약 번호를 기반으로 예약을 삭제하는 메서드
+    public boolean deleteReservationById(String reservationId){
+        for (Reservation reservation : reservationRepository.getReservationList()) {
+            if(reservation.getReservationId().equals(reservationId)){
+                int updateHotelAsset = getHotelAsset() - reservation.getRoom().getPrice();
+                putHotelAsset(updateHotelAsset);
+                reservationRepository.deleteReservation(reservation);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
