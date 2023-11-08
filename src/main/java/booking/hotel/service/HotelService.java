@@ -60,22 +60,19 @@ public class HotelService {
 
     // 예약 가능한 객실 목록을 반환하는 메서드
     public List<Room> getBookableRoomList(String date){
-        List<Room> list = new ArrayList<>();
 
-        for(int i=0;i<hotelRepository.getRoomList().size();i++){
-            list.add(hotelRepository.getRoomList().get(i));
-        }
+        List<Room> availableList = new ArrayList<>(hotelRepository.getRoomList());
 
         for(Room room : hotelRepository.getRoomList()) {
             for (Reservation reservation : reservationRepository.getReservationList()) {
                 String reservationDate = reservation.getReservationDate().substring(0, 10);
-                if (reservationDate.equals(date) && reservation.getRoom().getRoomNo()==room.getRoomNo()) {
-                    list.remove(room);
+                if (reservationDate.equals(date) && reservation.getRoom().getRoomNo() == room.getRoomNo()) {
+                    availableList.remove(room);
                     break;
                 }
             }
         }
-        return list;
+        return availableList;
     }
 
     // 예약 번호를 기반으로 예약 정보를 반환하는 메서드
