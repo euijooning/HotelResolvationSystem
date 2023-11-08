@@ -92,14 +92,13 @@ public class HotelService {
     }
 
     // 사용자 이름과 전화번호로 예약 번호 목록을 반환하는 메서드
-    public List<String> getReservationIdList(String userName, String userPhone){
+    public List<String> getReservationIdList(String userName, String phoneNumber){
         List<Reservation> reservations = reservationRepository.getReservationList();
-        return reservations.stream().filter(reservation -> reservation.getUserName().equals(userName)
-                        && reservation.getUserPhone().equals(userPhone))
+        return reservations.stream().filter(reservation -> reservation.getUsername().equals(userName)
+                        && reservation.getPhoneNumber().equals(phoneNumber))
                 .map(Reservation::getReservationId)
                 .collect(Collectors.toList());
     }
-
 
     private void putHotelAsset(int userAsset) {
         hotelRepository.setAsset(userAsset);
