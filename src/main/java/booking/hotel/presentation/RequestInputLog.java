@@ -3,12 +3,12 @@ package booking.hotel.presentation;
 public class RequestInputLog {
 
     // 사용자에게 이름을 입력하라는 메시지를 출력하는 메서드
-    public void showRequestUserNameMessage(){
+    public void showRequestUsernameMessage(){
         System.out.println("이름 :");
     }
 
     // 사용자에게 전화번호를 입력하라는 메시지를 출력하는 메서드
-    public void showRequestUserPhoneMessage(){
+    public void showRequestPhoneNumberMessage(){
         System.out.println("전화번호 :");
     }
 

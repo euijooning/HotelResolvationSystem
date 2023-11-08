@@ -37,7 +37,7 @@ public class HotelService {
         for (Room room : getBookableRoomList(date)) {  // ReservationList - list에서 해당 date에 예약 가능한 방 정보를 모두 불러온다.
             if (room.getRoomNumber() == roomNumber) {  // 그 중에 방 번호와 일치하는 room list가 있다면
                 for (User user : userRepository.getUserList()) {
-                    if (user.getUserName().equals(username) && user.getUserPhone().equals(phoneNumber)) {
+                    if (user.getUsername().equals(username) && user.getPhoneNumber().equals(phoneNumber)) {
                         if (user.getUserAsset() >= room.getPrice()) {
                             // ReservationRepository에서 id를 새로 생성해주고 Db에 저장해준다.
                             // id를 받아와야 함
@@ -112,7 +112,7 @@ public class HotelService {
     public void putUserAsset(String userName, String userPhone, int userAsset) {
         for (User user : userRepository.getUserList()) {
             // 이름, 전화번호가 모두 일치하는 유저리스트가 있다면
-            if (userName.equals(user.getUserName()) && userPhone.equals(user.getUserPhone())) {
+            if (userName.equals(user.getUsername()) && userPhone.equals(user.getPhoneNumber())) {
                 // 유저 목록의 소지금을 변경하는 매서드를 실행.
                 userRepository.setAsset(user, userAsset);
                 return;
@@ -147,7 +147,7 @@ public class HotelService {
     // 사용자 이름과 전화번호를 기반으로 데이터의 유효성을 검사하는 메서드
     public boolean validateUserDataInDB(String userName, String userPhone) {
         for (User user : userRepository.getUserList()) {
-            if (userName.equals(user.getUserName()) && userPhone.equals(user.getUserPhone())) {
+            if (userName.equals(user.getUsername()) && userPhone.equals(user.getPhoneNumber())) {
                 return true;
             }
         }
