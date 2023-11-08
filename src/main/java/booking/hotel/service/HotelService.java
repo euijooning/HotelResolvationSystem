@@ -100,6 +100,15 @@ public class HotelService {
                 .collect(Collectors.toList());
     }
 
+
+
+    // 2. POST Service
+    public void postNewUser(String username, String phoneNumber, int userAsset) {
+        userRepository.createUser(username, phoneNumber, userAsset);
+    }
+
+
+
     private void putHotelAsset(int userAsset) {
         hotelRepository.setAsset(userAsset);
     }
