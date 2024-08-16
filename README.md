@@ -20,5 +20,5 @@ JAVA를 사용한 간단한 콘솔 호텔예약 프로그램입니다. <br>
 
 ---
 ### 시연 영상
-- https://www.youtube.com/watch?v=gAFyz77d7kE
+- https://www.youtube.com/watch?v=6bhbQHjkbVg
 <br>  
